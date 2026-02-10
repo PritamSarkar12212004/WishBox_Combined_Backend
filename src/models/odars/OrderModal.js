@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-
-/* ===== ORDER ITEM SNAPSHOT ===== */
 const orderItemSchema = new mongoose.Schema(
   {
     product: {
@@ -18,7 +16,6 @@ const orderItemSchema = new mongoose.Schema(
   { _id: false },
 );
 
-/* ===== ADDRESS SNAPSHOT ===== */
 const orderAddressSchema = new mongoose.Schema(
   {
     fullName: String,
@@ -36,7 +33,6 @@ const orderAddressSchema = new mongoose.Schema(
   { _id: false },
 );
 
-/* ===== PAYMENT INFO ===== */
 const paymentSchema = new mongoose.Schema(
   {
     paymentType: {
@@ -56,7 +52,6 @@ const paymentSchema = new mongoose.Schema(
   { _id: false },
 );
 
-/* ===== ORDER SCHEMA ===== */
 const orderSchema = new mongoose.Schema(
   {
     orderId: {
@@ -87,7 +82,7 @@ const orderSchema = new mongoose.Schema(
       default: "placed",
     },
   },
-  { timestamps: true }, // createdAt = order date
+  { timestamps: true },
 );
 
 export default mongoose.model("Order", orderSchema);
