@@ -1,5 +1,4 @@
-import CollectionModal from "../../../models/product/CollectionModal.js";
-
+import CollectionModal from '../../../models/admin/product/CollectionModal.js'
 const CollectionCreateController = async (req, res) => {
   try {
     const {

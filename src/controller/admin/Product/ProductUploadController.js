@@ -1,5 +1,5 @@
-import ProductModal from "../../../models/product/ProductModal.js";
-import CollectionModal from "../../../models/product/CollectionModal.js";
+import CollectionModal from "../../../models/admin/product/CollectionModal.js";
+import ProductModal from "../../../models/admin/product/ProductModal.js";
 
 const ProductUploadController = async (req, res) => {
   try {

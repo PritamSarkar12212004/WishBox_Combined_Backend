@@ -1,52 +1,53 @@
+import OrderModal from "../../../models/admin/odars/OrderModal.js";
+
 const OdrsController = async (req, res) => {
-  const {
-    orderId,
-    customer,
-    items: { product, title, price, quantity },
-    image: { url, public_id },
-    shippingAddress: {
-      fullNfullName,
-      phone,
-      addressLine1,
-      addressLine2,
-      city,
-      state,
-      pincode,
-      country,
-    },
-    totalAmount,
-    payment: { paymentType, transactionId, paymentGateway, paymentStatus },
-    orderStatus,
-  } = req.body.payload;
-  if (
-    !orderId ||
-    !customer ||
-    !product ||
-    !title ||
-    !price ||
-    !quantity ||
-    !url ||
-    !public_id ||
-    !fullNfullName ||
-    !phone ||
-    !addressLine1 ||
-    !addressLine2 ||
-    !city ||
-    !state ||
-    !pincode ||
-    !country ||
-    !totalAmount ||
-    !paymentType ||
-    !transactionId ||
-    !paymentGateway ||
-    !paymentStatus ||
-    !orderStatus
-  ) {
-    return res.status(400).json({
-      message: "Ordar Placed requires all fields to be filled",
+  try {
+    const {
+      orderId,
+      customer,
+      items,
+      shippingAddress,
+      totalAmount,
+      payment,
+      orderStatus,
+    } = req.body;
+
+    if (
+      !orderId ||
+      !customer ||
+      !items ||
+      !shippingAddress ||
+      !totalAmount ||
+      !payment
+    ) {
+      return res.status(400).json({
+        message: "Order requires all mandatory fields",
+        status: false,
+      });
+    }
+
+    const order = await OrderModal.create({
+      orderId,
+      customer,
+      items, // ✅ array as it is
+      shippingAddress,
+      totalAmount,
+      payment,
+      orderStatus,
+    });
+
+    res.status(201).json({
+      message: "Order created successfully",
+      order,
+      status: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error creating order",
+      error: error.message,
       status: false,
     });
   }
-  
 };
+
 export default OdrsController;
