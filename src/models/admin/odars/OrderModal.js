@@ -58,24 +58,18 @@ const orderSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
-
     customer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-
     items: [orderItemSchema],
-
     shippingAddress: orderAddressSchema,
-
     totalAmount: {
       type: Number,
       required: true,
     },
-
     payment: paymentSchema,
-
     orderStatus: {
       type: String,
       enum: ["placed", "confirmed", "shipped", "delivered", "cancelled"],
